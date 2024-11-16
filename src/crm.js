@@ -49,8 +49,8 @@ async function fetchClients() {
       listItem.classList.add('client-item'); // Añadimos una clase para personalizar mejor
 
       listItem.innerHTML = `
-        <div class="client-info">
-          <span id="client-${doc.id}">
+        <div class="client-info" id="client-${doc.id}">
+          <span>
             ${client.name} - ${client.email} - ${client.phone}
           </span>
           <button class="edit-button" data-id="${doc.id}">Editar</button>
@@ -131,22 +131,20 @@ async function saveClient(clientId) {
 // Cancelar la edición del cliente
 function cancelEdit(clientId, client) {
   const clientElement = document.getElementById(`client-${clientId}`);
+
+  // Restaurar la visualización original del cliente
   clientElement.innerHTML = `
-    ${client.name} - ${client.email} - ${client.phone}
+    <span>
+      ${client.name} - ${client.email} - ${client.phone}
+    </span>
+    <button class="edit-button" data-id="${clientId}">Editar</button>
+    <button class="delete-button" data-id="${clientId}">Eliminar</button>
   `;
-  // Agregar de nuevo los botones de editar y eliminar
-  const editButton = document.createElement('button');
-  editButton.textContent = 'Editar';
-  editButton.classList.add('edit-button');
-  editButton.setAttribute('data-id', clientId);
+
+  // Reasignar eventos a los botones de editar y eliminar
+  const editButton = clientElement.querySelector('.edit-button');
   editButton.addEventListener('click', () => editClient(clientId, client));
 
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Eliminar';
-  deleteButton.classList.add('delete-button');
-  deleteButton.setAttribute('data-id', clientId);
+  const deleteButton = clientElement.querySelector('.delete-button');
   deleteButton.addEventListener('click', () => deleteClient(clientId));
-
-  clientElement.appendChild(editButton);
-  clientElement.appendChild(deleteButton);
 }

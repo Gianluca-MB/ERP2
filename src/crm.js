@@ -143,6 +143,7 @@ function cancelEdit(clientId, client) {
   deleteButton.setAttribute('data-id', clientId);
   deleteButton.addEventListener('click', () => deleteClient(clientId));
 
+  // Colocar ambos botones juntos en el mismo contenedor
   clientElement.appendChild(editButton);
   clientElement.appendChild(deleteButton);
 }

@@ -1,13 +1,19 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
-  root: '.', // Asegura que Vite use la raíz del proyecto
-  server: {
-    port: 5173, // Puerto predeterminado
-    strictPort: false, // Permite cambiar de puerto automáticamente si el predeterminado está ocupado
-    host: true, // Hace que el servidor sea accesible en la red local (útil para pruebas en otros dispositivos)
-  },
+  root: '.', // Define que el punto de entrada sea el directorio raíz
   build: {
-    outDir: 'dist', // Carpeta de salida al construir
+    outDir: 'dist', // Carpeta de salida al construir el proyecto
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        home: resolve(__dirname, 'src/home.html'), // Asegura que home.html también se procese
+      },
+    },
+  },
+  server: {
+    port: 5173, // Cambia el puerto si lo deseas
+    strictPort: true,
   },
 });

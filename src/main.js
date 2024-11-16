@@ -1,6 +1,7 @@
 import { auth, db } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
+import './crm'; // Importar la lógica del CRM
 
 // Elementos del DOM
 const loginContainer = document.getElementById('login-container');

@@ -1,105 +1,17 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.container {
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-container,
-.register-container {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-}
-
-.hidden {
-  display: none;
-}
-
-h1 {
-  text-align: center;
-  font-size: 24px;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.header-content {
+/* Asegurarnos de que los clientes y botones están alineados correctamente */
+.client-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  gap: 10px; /* Espacio entre cada elemento */
+  margin-bottom: 10px; /* Margen entre cada cliente */
 }
 
-#logout-button {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
+.client-info span {
+  flex-grow: 1; /* El texto del cliente toma todo el espacio posible */
 }
 
-#logout-button:hover {
-  background-color: #d32f2f;
-}
-
-.applications-section {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.applications-section h2 {
-  font-size: 32px;
-  color: #333;
+.edit-button,
+.delete-button {
+  margin-left: 5px;
 }

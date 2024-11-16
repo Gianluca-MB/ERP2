@@ -10,11 +10,13 @@ const registerForm = document.getElementById('register-form');
 const showRegisterForm = document.getElementById('show-register-form');
 const showLoginForm = document.getElementById('show-login-form');
 
-// Manejo del estado de autenticación
+// Verifica si el usuario ya está autenticado
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Si el usuario ya está autenticado, redirige a home.html
-    window.location.replace('home.html'); // Cambiamos a replace para asegurar una redirección efectiva
+    // Si el usuario está autenticado, redirige a home.html
+    if (window.location.pathname !== '/home.html') {
+      window.location.replace('/home.html'); // Asegúrate de que solo redirige una vez
+    }
   } else {
     // Si no hay usuario autenticado, muestra el formulario de inicio de sesión
     toggleForms(false);
@@ -59,8 +61,8 @@ async function loginUser(email, password) {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log("Inicio de sesión exitoso:", userCredential.user);
 
-    // Redirigir a la página principal
-    window.location.replace('home.html'); // Cambiamos a replace para evitar volver a la página de login con el botón "Atrás"
+    // Redirigir a la página principal solo si la autenticación es exitosa
+    window.location.replace('/home.html');
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     alert("Error al iniciar sesión: " + error.message);

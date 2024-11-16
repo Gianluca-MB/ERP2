@@ -14,7 +14,7 @@ const showLoginForm = document.getElementById('show-login-form');
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // Si el usuario ya está autenticado, redirige a home.html
-    window.location.replace('./home.html'); // Cambiamos a replace para asegurar una redirección efectiva
+    window.location.replace('home.html'); // Cambiamos a replace para asegurar una redirección efectiva
   } else {
     // Si no hay usuario autenticado, muestra el formulario de inicio de sesión
     toggleForms(false);
@@ -60,7 +60,7 @@ async function loginUser(email, password) {
     console.log("Inicio de sesión exitoso:", userCredential.user);
 
     // Redirigir a la página principal
-    window.location.replace('./home.html'); // Cambiamos a replace para evitar volver a la página de login con el botón "Atrás"
+    window.location.replace('home.html'); // Cambiamos a replace para evitar volver a la página de login con el botón "Atrás"
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     alert("Error al iniciar sesión: " + error.message);

@@ -4,8 +4,12 @@ import { collection, addDoc } from 'firebase/firestore';
 
 // Elementos del DOM
 const loginContainer = document.getElementById('login-container');
+const registerContainer = document.getElementById('register-container');
 const homeContainer = document.getElementById('home-container');
 const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+const showRegisterForm = document.getElementById('show-register-form');
+const showLoginForm = document.getElementById('show-login-form');
 const logoutButton = document.getElementById('logout-button');
 
 // Verifica si el usuario ya está autenticado
@@ -22,6 +26,7 @@ onAuthStateChanged(auth, (user) => {
 // Función para mostrar la página principal
 function showHome(user) {
   loginContainer.classList.add('hidden');
+  registerContainer.classList.add('hidden');
   homeContainer.classList.remove('hidden');
   document.getElementById('user-name').textContent = user.displayName || user.email;
 }
@@ -29,6 +34,14 @@ function showHome(user) {
 // Función para mostrar el formulario de inicio de sesión
 function showLogin() {
   loginContainer.classList.remove('hidden');
+  registerContainer.classList.add('hidden');
+  homeContainer.classList.add('hidden');
+}
+
+// Función para mostrar el formulario de registro
+function showRegister() {
+  loginContainer.classList.add('hidden');
+  registerContainer.classList.remove('hidden');
   homeContainer.classList.add('hidden');
 }
 
@@ -82,6 +95,24 @@ loginForm.addEventListener('submit', (e) => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   loginUser(email, password);
+});
+
+registerForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('register-name').value;
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+  registerUser(name, email, password);
+});
+
+showRegisterForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  showRegister();
+});
+
+showLoginForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  showLogin();
 });
 
 if (logoutButton) {

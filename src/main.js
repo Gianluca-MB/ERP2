@@ -1,37 +1,35 @@
 import { auth, db } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
 
 // Elementos del DOM
 const loginContainer = document.getElementById('login-container');
-const registerContainer = document.getElementById('register-container');
+const homeContainer = document.getElementById('home-container');
 const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-const showRegisterForm = document.getElementById('show-register-form');
-const showLoginForm = document.getElementById('show-login-form');
+const logoutButton = document.getElementById('logout-button');
 
 // Verifica si el usuario ya está autenticado
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Si el usuario está autenticado, redirige a home.html
-    if (window.location.pathname !== '/home.html') {
-      window.location.replace('/home.html'); // Asegúrate de que solo redirige una vez
-    }
+    // Si el usuario está autenticado, muestra la página principal
+    showHome(user);
   } else {
     // Si no hay usuario autenticado, muestra el formulario de inicio de sesión
-    toggleForms(false);
+    showLogin();
   }
 });
 
-// Función para mostrar el formulario de registro o el de inicio de sesión
-function toggleForms(showRegister) {
-  if (showRegister) {
-    loginContainer.style.display = 'none';
-    registerContainer.style.display = 'block';
-  } else {
-    loginContainer.style.display = 'block';
-    registerContainer.style.display = 'none';
-  }
+// Función para mostrar la página principal
+function showHome(user) {
+  loginContainer.classList.add('hidden');
+  homeContainer.classList.remove('hidden');
+  document.getElementById('user-name').textContent = user.displayName || user.email;
+}
+
+// Función para mostrar el formulario de inicio de sesión
+function showLogin() {
+  loginContainer.classList.remove('hidden');
+  homeContainer.classList.add('hidden');
 }
 
 // Registro de usuario
@@ -48,7 +46,7 @@ async function registerUser(name, email, password) {
     });
 
     alert("Registro exitoso. Ahora puedes iniciar sesión.");
-    toggleForms(false); // Cambia al formulario de inicio de sesión
+    showLogin();
   } catch (error) {
     console.error("Error al registrar usuario:", error);
     alert("Error al registrar usuario: " + error.message);
@@ -60,12 +58,21 @@ async function loginUser(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log("Inicio de sesión exitoso:", userCredential.user);
-
-    // Redirigir a la página principal solo si la autenticación es exitosa
-    window.location.replace('/home.html');
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     alert("Error al iniciar sesión: " + error.message);
+  }
+}
+
+// Cierre de sesión
+async function logoutUser() {
+  try {
+    await signOut(auth);
+    alert('Cierre de sesión exitoso');
+    showLogin();
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+    alert('Hubo un error al cerrar sesión');
   }
 }
 
@@ -77,20 +84,9 @@ loginForm.addEventListener('submit', (e) => {
   loginUser(email, password);
 });
 
-registerForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('register-name').value;
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-  registerUser(name, email, password);
-});
-
-showRegisterForm.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleForms(true);
-});
-
-showLoginForm.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleForms(false);
-});
+if (logoutButton) {
+  logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    logoutUser();
+  });
+}

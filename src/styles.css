@@ -1,4 +1,120 @@
-/* Asegurarnos de que los clientes y botones están alineados correctamente */
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.register-link,
+.login-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.register-link a,
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Home and CRM Styles */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logout-button {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+#logout-button:hover {
+  background-color: #c82333;
+}
+
+.applications-section {
+  margin-top: 30px;
+}
+
+#show-crm-button {
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#show-crm-button:hover {
+  background-color: #218838;
+}
+
+/* CRM Section Styles */
+#crm-container {
+  margin-top: 20px;
+}
+
+/* Styles for the list of clients */
 .client-info {
   display: flex;
   align-items: center;
@@ -11,7 +127,41 @@
   flex-grow: 1; /* El texto del cliente toma todo el espacio posible */
 }
 
+.client-item {
+  list-style-type: none; /* Eliminar el estilo de lista para cada cliente */
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
 .edit-button,
 .delete-button {
   margin-left: 5px;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Input styles for client edition */
+.client-info input {
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

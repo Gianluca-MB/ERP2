@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('user-name').textContent = user.displayName || user.email;
     } else {
       // Si no hay usuario autenticado, redirige al inicio de sesión
-      window.location.replace('./index.html');
+      window.location.replace('index.html');
     }
   });
 });
@@ -19,7 +19,7 @@ document.getElementById('logout-button').addEventListener('click', async () => {
   try {
     await signOut(auth);
     alert('Cierre de sesión exitoso');
-    window.location.replace('./index.html'); // Redirige al inicio de sesión
+    window.location.replace('index.html'); // Redirige al inicio de sesión
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
     alert('Hubo un error al cerrar sesión');

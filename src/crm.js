@@ -46,12 +46,16 @@ async function fetchClients() {
     querySnapshot.forEach((doc) => {
       const client = doc.data();
       const listItem = document.createElement('li');
+      listItem.classList.add('client-item'); // Añadimos una clase para personalizar mejor
+
       listItem.innerHTML = `
-        <span id="client-${doc.id}">
-          ${client.name} - ${client.email} - ${client.phone}
-        </span>
-        <button class="edit-button" data-id="${doc.id}">Editar</button>
-        <button class="delete-button" data-id="${doc.id}">Eliminar</button>
+        <div class="client-info">
+          <span id="client-${doc.id}">
+            ${client.name} - ${client.email} - ${client.phone}
+          </span>
+          <button class="edit-button" data-id="${doc.id}">Editar</button>
+          <button class="delete-button" data-id="${doc.id}">Eliminar</button>
+        </div>
       `;
 
       // Botón para eliminar el cliente
@@ -143,7 +147,6 @@ function cancelEdit(clientId, client) {
   deleteButton.setAttribute('data-id', clientId);
   deleteButton.addEventListener('click', () => deleteClient(clientId));
 
-  // Colocar ambos botones juntos en el mismo contenedor
   clientElement.appendChild(editButton);
   clientElement.appendChild(deleteButton);
 }

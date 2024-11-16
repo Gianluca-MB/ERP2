@@ -90,11 +90,15 @@ function editClient(clientId, client) {
   // Crear elementos para la edición en línea
   const clientElement = document.getElementById(`client-${clientId}`);
   clientElement.innerHTML = `
-    <input type="text" id="edit-name-${clientId}" value="${client.name}">
-    <input type="email" id="edit-email-${clientId}" value="${client.email}">
-    <input type="text" id="edit-phone-${clientId}" value="${client.phone}">
-    <button class="save-button" data-id="${clientId}">Guardar</button>
-    <button class="cancel-button" data-id="${clientId}">Cancelar</button>
+    <div class="edit-client-container">
+      <input type="text" id="edit-name-${clientId}" value="${client.name}">
+      <input type="email" id="edit-email-${clientId}" value="${client.email}">
+      <input type="text" id="edit-phone-${clientId}" value="${client.phone}">
+      <div class="edit-buttons">
+        <button class="save-button" data-id="${clientId}">Guardar</button>
+        <button class="cancel-button" data-id="${clientId}">Cancelar</button>
+      </div>
+    </div>
   `;
 
   // Botón para guardar los cambios
